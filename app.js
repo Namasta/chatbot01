@@ -4,6 +4,17 @@ var bodyParser = require('body-parser');
 var functions = require('firebase-functions');
 var {WebhookClient,Card,} = require('dialogflow-fulfillment');
 
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./serviceAcctKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://lecture20nov.firebaseio.com"
+});
+
+const db = admin.firestore();
+
 //Create an instance of express server
 var expressApp = express().use(bodyParser.json());
 
